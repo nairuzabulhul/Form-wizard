@@ -1,0 +1,735 @@
+<!DOCTYPE html>
+<html >
+  <head>
+    <meta charset="UTF-8">
+    <title>WIZARD</title>
+    
+    
+    <link rel="stylesheet" href="css/reset.css">
+
+    <link rel='stylesheet prefetch' href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css'>
+<link rel='stylesheet prefetch' href='https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/css/bootstrap-datepicker3.css'>
+<link rel='stylesheet prefetch' href='https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css'>
+
+        <style>
+      /* NOTE: The styles were added inline because Prefixfree needs access to your styles and they must be inlined if they are on local disk! */
+      @import url(https://fonts.googleapis.com/css?family=Lato:400,100,300,700);
+
+body {
+  background-color: #ddd;
+}
+
+#small-note{
+  font-style: italic;
+}
+.myData .col-md-12 > h1,h2,h3,label,select{
+  font-family: 'Lato';
+  font-weight: 300;
+}
+.btn{
+  font-family: 'Lato' !important;
+  font-weight: 400 !important;
+  /* font-size: 15px; */
+  background: rgba(241,93,37,1); 
+  border:1px solid white;
+  color:white;
+}
+
+.btn-success:hover{
+   background: rgba(241,93,37,0.9); 
+  color:white;
+  font-size:1em;
+  border:none;
+}
+
+.btn-default{;
+  background-color:#FFFFFF;
+  border: 1px solid grey;
+  color :black;
+}
+.wizard {
+  border-radius: 0 0 5px 5px;
+  margin: 20px auto;
+  background: #fff;
+}
+
+.wizard .nav-tabs {
+  position: relative;
+  /* margin: 40px auto; */
+  margin-bottom: 0;
+  border-bottom-color: #e0e0e0;
+/*   background-color: #39cb58; */
+  background-color:#DA3126;
+  
+  box-shadow: inset 0px -5px rgba(0,0,0,0.25);
+}
+
+.wizard > div.wizard-inner {
+  position: relative;
+}
+
+.connecting-line {
+  height: 2px;
+  background: #e0e0e0;
+  position: absolute;
+  width: 80%;
+  margin: 0 auto;
+  left: 0;
+  right: 0;
+  top: 50%;
+  z-index: 1;
+}
+
+.wizard .nav-tabs > li.active > a,
+.wizard .nav-tabs > li.active > a:hover,
+.wizard .nav-tabs > li.active > a:focus {
+  color: #555555;
+  cursor: default;
+  border: 0;
+  border-bottom-color: transparent;
+}
+
+span.round-tab {
+  width: 70px;
+  height: 70px;
+  line-height: 70px;
+  display: inline-block;
+  border-radius: 100px;
+  background: #fff;
+  border: 2px solid #e0e0e0;
+  z-index: 2;
+  position: absolute;
+  left: 0;
+  text-align: center;
+  font-size: 25px;
+}
+
+span.round-tab i {
+  color: #555555;
+}
+
+.wizard li.active span.round-tab {
+  color: #fff;
+  background: #fff;
+  background: rgba(241,93,37,1);
+  border: 2px solid #5bc0de;
+  border: 3px solid white;
+}
+
+.wizard li.active span.round-tab i {
+  color: #5bc0de;
+  color: #fff;
+}
+
+span.round-tab:hover {
+  color: #333;
+  border: 2px solid #ddd;
+}
+
+.wizard .nav-tabs > li {
+  width: 14%;
+}
+
+.wizard li:after {
+  content: " ";
+  position: absolute;
+  left: 46%;
+  opacity: 0;
+  margin: 0 auto;
+  bottom: 0px;
+  border: 5px solid transparent;
+  border-bottom-color: #5bc0de;
+  border-bottom-color: #fff;
+  transition: 0.1s ease-in-out;
+}
+
+.wizard li.active:after {
+  content: " ";
+  position: absolute;
+  left: 46%;
+  opacity: 1;
+  margin: 0 auto;
+  bottom: 0px;
+  border: 10px solid transparent;
+  border-bottom-color: #5bc0de;
+  border-bottom-color: #fff;
+}
+
+.wizard .nav-tabs > li a {
+  width: 70px;
+  height: 70px;
+  margin: 20px auto;
+  border-radius: 100%;
+  padding: 0;
+}
+
+.wizard .nav-tabs > li a:hover {
+  background: transparent;
+}
+
+.wizard .tab-pane {
+  position: relative;
+  padding: 20px;
+}
+
+.wizard h3 {
+  margin-top: 0;
+}
+h1, h2, h3{
+  color: #555;
+}
+label{
+  text-align: center;
+  font-size: 16px;
+}
+.btn{
+  margin-top: 10px;
+  padding: 15px 25px;
+}
+.progress{
+  margin-top: 10px;
+  /* background-color: red !important; */
+}
+
+@media( max-width: 585px) {
+  .wizard {
+    width: 90%;
+    height: auto !important;
+  }
+  span.round-tab {
+    font-size: 16px;
+    width: 50px;
+    height: 50px;
+    line-height: 50px;
+  }
+  .wizard .nav-tabs > li a {
+    width: 50px;
+    height: 50px;
+    line-height: 50px;
+  }
+  .wizard li.active:after {
+    content: " ";
+    position: absolute;
+    left: 35%;
+  }
+}
+
+.small-image{
+        height:90px; 
+        padding:4px;
+        margin-top:20px;
+        float:left;                
+        }
+.small-image1{
+  height:120px;
+  padding:2px;
+  margin-top:5px;
+  float:left;
+  margin-bottom:30px;
+}
+
+#sideImage1{
+       margin-top:7px;
+       height:450px;
+       padding-left:0;
+       }
+
+#sideImage2{
+      margin-top:7px;
+       height:400px;
+       /*width:600px;*/
+       padding-left:0;
+       /*padding-right:0;*/
+      }
+
+#sideImage3{
+      margin-top:11px;
+       height:430px;
+       /*width:600px;*/
+       padding-left:0;
+       /*padding-right:0;*/
+      }
+#sideImage4{
+      margin-top:11px;
+       height:430px;
+       /*width:600px;*/
+       padding-left:0;
+       /*padding-right:0;*/
+      }
+
+#sideImage5{
+      margin-top:11px;
+       height:430px;
+       /*width:600px;*/
+       padding-left:0;
+       /*padding-right:0;*/
+      }
+
+/* sm screen size */
+/*@media only screen and (min-width: 768px) {
+    body{font-size: 14px !important;}
+}*/
+/* xs screen size */
+/*@media only screen and (max-width: 768px) {
+    body{font-size: 100% !important;}
+}*/
+    </style>
+
+    
+        <script src="js/prefixfree.min.js"></script>
+
+    
+  </head>
+
+  <body>
+
+    <div class="container">
+  <div class="row">
+    <section>
+      <div class="wizard">
+        <div class="wizard-inner">
+          <div class="connecting-line"></div>
+          <ul class="nav nav-tabs" role="tablist">
+
+            <li role="presentation" class="active">
+              <a href="#step1" data-toggle="tab" aria-controls="step1" role="tab" title="Step 1">
+                <span class="round-tab">
+                  <i class="glyphicon glyphicon-arrow-right"></i>
+                </span>
+              </a>
+            </li>
+            <li role="presentation" class="disabled">
+              <a href="#step2" data-toggle="tab" aria-controls="step2" role="tab" title="Step 2">
+                <span class="round-tab">
+                  <i class="glyphicon glyphicon-briefcase"></i>
+                </span>
+              </a>
+            </li>
+            <li role="presentation" class="disabled">
+              <a href="#step3" data-toggle="tab" aria-controls="step3" role="tab" title="Step 3">
+                <span class="round-tab">
+                  <i class="glyphicon glyphicon-user"></i>
+                </span>
+              </a>
+            </li>
+            <li role="presentation" class="disabled">
+              <a href="#step4" data-toggle="tab" aria-controls="complete" role="tab" title="Step 4">
+                <span class="round-tab">
+                  <i class="glyphicon glyphicon-shopping-cart"></i>
+                </span>
+              </a>
+            </li>
+
+            <li role="presentation" class="disabled">
+              <a href="#step5" data-toggle="tab" aria-controls="complete5" role="tab" title="Step 5">
+                <span class="round-tab">
+                  <i class="glyphicon glyphicon-list"></i>
+                </span>
+              </a>
+            </li>
+
+            <li role="presentation" class="disabled">
+              <a href="#step6" data-toggle="tab" aria-controls="complete" role="tab" title="Step 6">
+                <span class="round-tab">
+<!--                   <i class="glyphicons glyphicons-fees-payments"></i> -->
+                  <i class="fa fa-credit-card-alt" aria-hidden="true"></i>
+                </span>
+              </a>
+            </li>
+
+            <li role="presentation" class="disabled">
+              <a href="#complete" data-toggle="tab" aria-controls="complete" role="tab" title="Complete">
+                <span class="round-tab">
+                  <i class="glyphicon glyphicon-ok"></i>
+                </span>
+              </a>
+            </li>
+          </ul>
+        </div>
+
+     <form role="form" id="form" data-toggle="validator">
+          <div class="tab-content">
+
+            <!-- TAB 1 -->
+            <div class="tab-pane fade in active" role="tabpanel" id="step1">
+              <div class="container-fluid myData">
+                <div class="row col-md-12">
+                  <div class="col-md-5">
+                     <img src="https://s31.postimg.org/cm70q3y97/food1.jpg" class="img-responsive" id="sideImage2">
+                  </div>
+                  
+                  <div class="col-md-7">
+                    <br>
+                 <h3>Where and When ?</h3>
+                  <img src="https://s32.postimg.org/71e4cwlsl/bike1.jpg" class="img-responsive small-image1" >
+                 <img src="https://s32.postimg.org/qqpfz5mg5/com11.jpg" class="img-responsive small-image1">
+                 <img src="https://s31.postimg.org/gwh37tghn/office.jpg" class="img-responsive small-image1">
+<!--                   <img src="https://s32.postimg.org/hl44rydk5/photo_1424847651672_bf20a4b0982b.jpg" class="img-responsive small-image"> -->
+
+                 <label><b>For How Many People ?</b></label>
+                 <div class="form-group">
+                   <input type="text" class="form-control" placeholder="Company Name" aria-describedby="basic-addon1" id="country" required>
+                 </div>  
+                   <p id="small-note">you can change this later.</p>
+                    
+                </div>
+                   <!--BUTTONS-->
+                    <div class="row col-md-12">
+                      <ul class="list-inline pull-right">
+                        <li>
+                          <button type="button" class="btn btn-default prev-step">Previous</button>
+                        </li>
+                        <li>
+                          <button type="button" class="btn btn-success next-step">Save and Continue</button>
+                        </li>
+                      </ul>
+                    </div>
+                    <!--END BUTTONS-->
+                 
+              </div>
+              <!-- END ROW 12 -->
+              </div>    
+          </div>
+           
+    <!--  END TAB 1  -->
+   
+     <!--TAB 2 -->
+            <div class="tab-pane fade" role="tabpanel" id="step2">
+              <div class="container-fluid myData">
+                <div class="row col-md-12">
+                  <div class="col-md-5">
+                    <img src="https://s31.postimg.org/7woujdkff/photo_1450024529642_858b23834369.jpg" class="img-responsive" id="sideImage1">
+                  </div>
+
+                  <div class="col-md-5">
+                    <h3>Where and When ?</h3>
+
+                    <label><b>Company Name</b></label>
+                    <div class="form-group">
+                      <input type="text" class="form-control" placeholder="Company Name" aria-describedby="basic-addon1" id="country" required>
+                    </div>
+
+                    <label><b>Address 1</b></label>
+                    <div class="form-group">
+                      <input type="text" class="form-control" placeholder="Address 1" aria-describedby="basic-addon1" id="country" required>
+                    </div>
+
+
+                    <label><b>Address 2</b></label>
+                    <div class="form-group">
+                      <input type="text" class="form-control" placeholder="Address 2" aria-describedby="basic-addon1" id="country" required>
+                    </div>
+
+                    <!--City/State/ZipCode ROW 1-->
+                    <div class="row">
+                      <div class="col-xs-6">
+                        <label><b>City</b></label>
+                        <input type="text" class="form-control" placeholder="City">
+                      </div>
+
+                      <div class="col-xs-3">
+                        <label><b>State</b></label>
+                        <input type="text" class="form-control" placeholder="State">
+                      </div>
+
+                      <div class="col-xs-3">
+                        <label><b>Zip Code</b></label>
+                        <input type="text" class="form-control" placeholder="#####">
+                      </div>
+                    </div>
+                    <!--END ROW 1-->
+
+                    <br>
+                    <!--Date/ Start/ End ROW 2-->
+                    <div class="row" id="test">
+                      <div class="col-xs-6">
+                        <div class="form-group">
+                          <!-- Date input -->
+                          <label class="control-label" for="date"><b>Date</b></label>
+                          <input class="form-control" id="date" name="date" placeholder="MM/DD/YYY" type="text" />
+                        </div>
+                      </div>
+
+                      <div class="col-xs-3">
+                        <label><b>Start</b></label>
+                        <input type="text" class="form-control" placeholder="Start">
+                      </div>
+
+                      <div class="col-xs-3">
+                        <label><b>End</b></label>
+                        <input type="text" class="form-control" placeholder="End">
+                      </div>
+                    </div>
+                    <!--END ROW 2-->
+                  </div>
+                </div>
+                <!--END OF ROW 12   -->           
+                   <!--BUTTONS-->
+                    <div class="row col-md-12">
+                      <ul class="list-inline pull-right">
+                        <li>
+                          <button type="button" class="btn btn-default prev-step">Previous</button>
+                        </li>
+                        <li>
+                          <button type="button" class="btn btn-success next-step">Save and Continue</button>
+                        </li>
+                      </ul>
+                    </div>
+                  <!--END BUTTONS-->         
+              </div>
+            </div>
+            <!-- END TAB 2-->
+
+            <!-- TAB 3-->
+            <div class="tab-pane fade" role="tabpanel" id="step3">
+              <div class="container-fluid myData">
+                <div class="row col-md-12">
+                  <div class="col-md-5">
+                    <img src="https://s32.postimg.org/l2oz9e2s5/office1.jpg" class="img-responsive" id="sideImage3">
+                  </div>
+                  <div class="col-md-5">
+                    <br>
+                    <h3>Great, now tell us about yourself !</h3>
+                    <br>
+                    <label><b>Your Name *</b></label>
+                    <div class="form-group">
+                      <input type="text" class="form-control" placeholder="Name" aria-describedby="basic-addon1" id="name" required>
+                    </div>
+
+                    <label><b>Your Email Address *</b></label>
+                    <div class="form-group">
+                      <input type="text" class="form-control" placeholder="Email Address" aria-describedby="basic-addon1" id="email" required>
+                    </div>
+
+                    <label><b>Set a password</b></label>
+                    <div class="form-group">
+                      <input type="text" class="form-control" placeholder="Password" aria-describedby="basic-addon1" id="password" required>
+                    </div>
+
+                    <br>
+
+                    <input type="checkbox">
+                    <label>I accept the <a href="#"><b>terms and conditions</b></a></label>
+
+                  </div>
+                  <!--  END ROW 12  -->
+                </div>
+
+                <!--  BUTTONS   -->
+                <div class="row col-md-12">
+                  <ul class="list-inline pull-right">
+                    <li>
+                      <button type="button" class="btn btn-default prev-step">Previous</button>
+                    </li>
+                    <li>
+                      <button type="button" class="btn btn-default next-step">Skip</button>
+                    </li>
+                    <li>
+                      <button type="button" class="btn btn-success next-step">Save and continue</button>
+                    </li>
+                  </ul>
+                </div>
+                <!-- END BUTTONS -->
+              </div>
+            </div>
+            <!--END TAB 3-->
+
+            <!-- TAB 4 -->
+            <div class="tab-pane fade" role="tabpanel" id="step4">
+              <div class="container-fluid myData">
+                <div class="row col-md-12">
+                  <div class="col-md-5">
+                    <img src="https://s32.postimg.org/xui790mth/food3.jpg" class="img-responsive" id="sideImage4">
+                  </div>
+                  <div class="col-md-5">
+                    <br>
+                    <h3 id="spend">How much do you typically spend on ___ ? </h3>
+                    <br>
+                    <div class="row">
+                      <div class="col-xs-6">
+                        <div class="form-group">
+                          <!-- Date input -->
+                          <input type="text" class="form-control" placeholder="$">
+                        </div>
+                      </div>
+                      <label id="perPerson" class="control-label" for="date"><b>per person</b></label>
+                    </div>
+                    <br>
+
+                    <h3 id="spend">What's the most you are willing to spend on __ ?</h3>
+                    <br>
+                    <div class="row">
+                      <div class="col-xs-6">
+                        <div class="form-group">
+                          <!-- Date input -->
+                          <input type="text" class="form-control" placeholder="$">
+                        </div>
+                      </div>
+                      <label id="perPerson" class="control-label" for="date"><b>per person</b></label>
+                    </div>
+                  </div>
+                  <!-- END ROW 12 -->
+                  <!--  BUTTONS   -->
+                  <div class="row col-md-12">
+                    <ul class="list-inline pull-right">
+                      <li>
+                        <button type="button" class="btn btn-default prev-step">Previous</button>
+                      </li>
+                      <li>
+                        <button type="button" class="btn btn-default next-step">Skip</button>
+                      </li>
+                      <li>
+                        <button type="button" class="btn btn-success next-step">Save and continue</button>
+                      </li>
+                    </ul>
+                  </div>
+                  <!-- END BUTTONS -->
+                </div>
+              </div>
+            </div>
+            <!--   END TAB 4  -->
+
+            <!-- TAB 5 -->
+            <div class="tab-pane fade" role="tabpanel" id="step5">
+              <div class="container-fluid myData">
+                <div class="row col-md-12">
+                  <div class="col-md-5">
+                    <img src="https://s32.postimg.org/cfhz56bz9/fire.jpg" class="img-responsive" id="sideImage5">
+                  </div>
+
+                  <div class="col-md-5">
+                    <h4>Great! We just need to know a few more things... </h4>
+                    <br>
+                    <label><b>Question 1</b></label>
+                    <div class="form-group">
+                      <input type="text" class="form-control" placeholder="" aria-describedby="basic-addon1" id="country" required>
+                    </div>
+
+                    <label><b>Question 2</b></label>
+                    <div class="form-group">
+                      <input type="text" class="form-control" placeholder="" aria-describedby="basic-addon1" id="country" required>
+                    </div>
+
+
+                    <label><b>Question 3</b></label>
+                    <div class="form-group">
+                      <input type="text" class="form-control" placeholder="...." aria-describedby="basic-addon1" id="country" required>
+                    </div>
+
+                    <label><b>Any other comments or requests?</b></label>
+                    <div class="form-group">
+                      <!--                    <input type="text" class="form-control" placeholder="Address 2" aria-describedby="basic-addon1" id="country" required> -->
+                      <textarea class="form-control" placeholder="...." id="comments"> </textarea>
+                    </div>
+
+                  </div>
+                  <!--  END ROW 12  -->
+                </div>
+
+                <!--  BUTTONS   -->
+                <div class="row col-md-12">
+                  <ul class="list-inline pull-right">
+                    <li>
+                      <button type="button" class="btn btn-default prev-step">Previous</button>
+                    </li>
+                    <li>
+                      <button type="button" class="btn btn-default next-step">Skip</button>
+                    </li>
+                    <li>
+                      <button type="button" class="btn btn-success next-step">Save and continue</button>
+                    </li>
+                  </ul>
+                </div>
+                <!-- END BUTTONS -->
+              </div>
+            </div>
+  <!--   END TAB 5  -->
+   
+   <!-- TAB 6 -->
+   <div class="tab-pane fade" role="tabpanel" id="step6">
+     <div class="container-fluid myData">
+            <div class="row col-md-12">
+                  <div class="col-md-5">
+                    <img src="https://s31.postimg.org/iw2qwbtzf/office4.jpg" class="img-responsive" id="sideImage5">
+                  </div>
+
+                  <div class="col-md-5">
+                    <h4>Great! We just need to know a few more things... </h4>
+                    <br>
+                    <label><b>Question 1</b></label>
+                    <div class="form-group">
+                      <input type="text" class="form-control" placeholder="" aria-describedby="basic-addon1" id="country" required>
+                    </div>
+
+                    <label><b>Question 2</b></label>
+                    <div class="form-group">
+                      <input type="text" class="form-control" placeholder="" aria-describedby="basic-addon1" id="country" required>
+                    </div>
+
+
+                    <label><b>Question 3</b></label>
+                    <div class="form-group">
+                      <input type="text" class="form-control" placeholder="...." aria-describedby="basic-addon1" id="country" required>
+                    </div>
+
+                    <label><b>Any other comments or requests?</b></label>
+                    <div class="form-group">
+                      <!--                    <input type="text" class="form-control" placeholder="Address 2" aria-describedby="basic-addon1" id="country" required> -->
+                      <textarea class="form-control" placeholder="...." id="comments"> </textarea>
+                    </div>
+             
+                  </div>
+                  <!--  END ROW 12  -->
+               <!--  BUTTONS   -->
+                <div class="row col-md-12">
+                  <ul class="list-inline pull-right">
+                    <li>
+                      <button type="button" class="btn btn-default prev-step">Previous</button>
+                    </li>
+                    <li>
+                      <button type="button" class="btn btn-default next-step">Skip</button>
+                    </li>
+                    <li>
+                      <button type="button" class="btn btn-success next-step">Save and continue</button>
+                    </li>
+                  </ul>
+                </div>
+                <!-- END BUTTONS -->
+                </div>
+           </div>
+       </div>
+<!-- END TAB 6 -->
+     
+<!-- TAB 7  -->
+   <div class="tab-pane fade" role="tabpanel" id="complete">
+     <div class="container-fluid myData">
+               <div class="row col-md-12">
+                  <div class="center-block text-center">
+                    <h2>Thank you for Joining Aspire&nbsp;&nbsp;<span style="color:#f48260;" class="glyphicon glyphicon-thumbs-up"></span></h2>
+                    <input type="submit" class="btn btn-success" />
+                  </div>
+                </div>
+                  <!--  END ROW 12  -->
+            </div>
+           </div>
+       </div>           
+<!-- END TAB 7-->
+      </div>
+   </form>
+<!--    END OF FORM      -->
+  </div>
+  </section>
+</div>
+</div>
+    <script src='http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
+<script src='https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/js/bootstrap-datepicker.min.js'></script>
+<script src='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js'></script>
+<script src='https://cdnjs.cloudflare.com/ajax/libs/1000hz-bootstrap-validator/0.9.0/validator.min.js'></script>
+
+        <script src="js/index.js"></script>
+
+    
+    
+    
+  </body>
+</html>
